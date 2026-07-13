@@ -1,0 +1,2 @@
+backend  https://zamato-368j.onrender.com
+https://zomzoms.netlify.app/
