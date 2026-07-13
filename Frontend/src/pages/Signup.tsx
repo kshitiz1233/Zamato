@@ -8,6 +8,8 @@ interface SignupProps {
 function Signup({ onAuth }: SignupProps) {
   const API_URL = import.meta.env.VITE_API_URL;
 
+console.log("API_URL:", API_URL);
+  
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -34,6 +36,7 @@ function Signup({ onAuth }: SignupProps) {
     }
 
     try {
+      console.log(API_URL);
       const response = await fetch(`${API_URL}/api/users/signup`, {
         method: "POST",
         body: formData,
