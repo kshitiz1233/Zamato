@@ -16,7 +16,7 @@ export const Route = createFileRoute("/login")({
   component: LoginPage,
 });
 
-const API_URL = "http://localhost:8001/api";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ function LoginPage() {
   async function handleLogin(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
-    const response = await fetch(`${API_URL}/vendors/login`, {
+    const response = await fetch(`${API_URL}/api/vendors/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ mobile, password }),

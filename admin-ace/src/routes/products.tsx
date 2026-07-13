@@ -17,7 +17,7 @@ export const Route = createFileRoute("/products")({
   component: ProductsPage,
 });
 
-const API_URL = "http://localhost:8001/api";
+const API_URL = import.meta.env.VITE_API_URL;
 
 type Category = { id: number; name: string };
 type Product = {
@@ -61,10 +61,10 @@ function ProductsPage() {
     setLoading(true);
     const vendorToken = localStorage.getItem("vendorToken");
     const [productRes, categoryRes] = await Promise.all([
-      fetch(vendorToken ? `${API_URL}/products/vendor/me` : `${API_URL}/products`, {
+      fetch(vendorToken ? `${API_URL}/products/vendor/me` : `${API_URL}/api/products`, {
         headers: vendorToken ? { Authorization: `Bearer ${vendorToken}` } : {},
       }),
-      fetch(`${API_URL}/categories`),
+      fetch(`${API_URL}/api/categories`),
     ]);
     setProducts(await productRes.json());
     setCategories(await categoryRes.json());
@@ -79,7 +79,7 @@ function ProductsPage() {
     event.preventDefault();
     setSaving(true);
 
-    await fetch(`${API_URL}/products`, {
+    await fetch(`${API_URL}/api/products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

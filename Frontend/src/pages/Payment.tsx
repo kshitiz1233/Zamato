@@ -33,7 +33,7 @@ interface PaymentLocationState {
   address?: string;
 }
 
-const API_URL = 'http://localhost:8001/api';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Payment() {
   const { clearCart } = useApp();
@@ -65,7 +65,7 @@ export default function Payment() {
     setCheckoutError(null);
 
     try {
-      const res = await fetch(`${API_URL}/orders/payment/confirm`, {
+      const res = await fetch(`${API_URL}/api/orders/payment/confirm`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

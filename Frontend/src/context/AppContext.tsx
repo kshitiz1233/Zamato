@@ -410,7 +410,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [orders, setOrders] = useState<Order[]>(sampleOrders);
   const [currentRestaurant, setCurrentRestaurant] = useState<Restaurant | null>(null);
 
-  const API_URL = 'http://localhost:8001/api';
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const addToCart = (item: MenuItem, restaurantId: string, restaurantName: string) => {
     setCart((prev) => {
@@ -470,7 +470,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       discount: 0,
     };
 
-    const response = await fetch(`${API_URL}/orders`, {
+    const response = await fetch(`${API_URL}/api/orders`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

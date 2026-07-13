@@ -15,8 +15,7 @@ export const Route = createFileRoute("/categories")({
   component: CategoriesPage,
 });
 
-const API_URL = "http://localhost:8001/api";
-
+const API_URL = import.meta.env.VITE_API_URL;
 type Category = {
   id: number;
   name: string;
@@ -32,7 +31,7 @@ function CategoriesPage() {
   const [image, setImage] = useState("");
 
   async function loadCategories() {
-    const response = await fetch(`${API_URL}/categories`);
+    const response = await fetch(`${API_URL}/api/categories`);
     setCategories(await response.json());
   }
 
@@ -42,7 +41,7 @@ function CategoriesPage() {
 
   async function createCategory(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    await fetch(`${API_URL}/categories`, {
+    await fetch(`${API_URL}/api/categories`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, image, active: true }),
@@ -54,7 +53,7 @@ function CategoriesPage() {
   }
 
   async function toggleCategory(category: Category, active: boolean) {
-    await fetch(`${API_URL}/categories/${category.id}`, {
+    await fetch(`${API_URL}/api/categories/${category.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ active }),
