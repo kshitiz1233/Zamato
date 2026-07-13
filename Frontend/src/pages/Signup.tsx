@@ -27,10 +27,11 @@ function Signup({ onAuth }: SignupProps) {
      }
 
    try {
-     const response = await fetch('http://localhost:8001/api/users/signup', {
-         method: 'POST',
-         body: formData,
-     });
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/signup`, {
+  method: "POST",
+  body: formData,
+});
+     };
 
         if (!response.ok) {
             throw new Error('Network response was not ok');
